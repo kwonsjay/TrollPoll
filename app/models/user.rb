@@ -8,6 +8,8 @@ class User < ActiveRecord::Base
   validates :username, :presence => true
 
   after_initialize :ensure_session_token
+  
+  has_many :polls
 
   def self.find_by_credentials(username, password)
     user = User.find_by_username(username)

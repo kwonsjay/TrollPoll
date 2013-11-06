@@ -11,7 +11,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106005635) do
+ActiveRecord::Schema.define(version: 20131106012821) do
+
+  create_table "polls", force: true do |t|
+    t.string   "question",                   null: false
+    t.boolean  "private",    default: false, null: false
+    t.integer  "user_id",                    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "polls", ["user_id"], name: "index_polls_on_user_id"
+
+  create_table "responses", force: true do |t|
+    t.string   "answer",     null: false
+    t.integer  "poll_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "responses", ["poll_id"], name: "index_responses_on_poll_id"
 
   create_table "users", force: true do |t|
     t.string   "username",        null: false
