@@ -1,0 +1,11 @@
+<div id="wrapper">
+<div id="sidebar"></div>
+<div id="header">
+	<h1>Troll Poll</h1>
+	<% if user_signed_in? %>
+	<%= link_to "Sign Out", session_url, :method => :delete %>
+	<% end %>
+</div>
+<div id="errors"></div>
+<div id="content"></div>
+</div>

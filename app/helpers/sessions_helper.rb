@@ -7,6 +7,11 @@ module SessionsHelper
     @current_user = user
     session[:session_token] = user.session_token
   end
+  
+  def user_signed_in?
+    return true if @current_user
+    return false
+  end
 
   def logout_current_user!
     current_user.reset_session_token!

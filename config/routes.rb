@@ -7,5 +7,5 @@ TrollPoll::Application.routes.draw do
     resource :favorite, :only => [:create, :destroy]
   end
   resource :session, :only => [:create, :destroy, :new]
-  root :to => "users#show"
+  root :to => "static#root"
 end
