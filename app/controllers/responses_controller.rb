@@ -4,17 +4,7 @@ class ResponsesController < ApplicationController
     if @response.save
       render :json => @response
     else
-      render :json => @response.errors.full_messages
+      render :json => @response.errors.full_messages, :status => 422
     end
   end
-  
-  def destroy
-    @response = Response.find(params[:id])
-    if @response.destroy
-      render :json => "successfully destroyed"
-    else
-      render :json => "cannot destroy!"
-    end
-  end
-  
 end

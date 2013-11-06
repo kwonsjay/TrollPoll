@@ -4,4 +4,5 @@ class Poll < ActiveRecord::Base
   
   belongs_to :user
   has_many :responses, :inverse_of => :poll
+  has_one :favorite
 end
