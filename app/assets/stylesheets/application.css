@@ -6,7 +6,7 @@
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
  *
  * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
+ * compiled file, but it's generally better to login a new file per style scope.
  *
  *= require_self
  *= require_tree .
@@ -20,7 +20,7 @@
  * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
  *
  * You're free to add application-wide styles to this file and they'll appear at the top of the
- * compiled file, but it's generally better to create a new file per style scope.
+ * compiled file, but it's generally better to login a new file per style scope.
  *
  *= require_tree .
  */
@@ -32,6 +32,7 @@ html,body {
 	padding: 0;
 	height: 100%;
 	overflow-x: hidden;
+	color: #9099a3;
 }
 
 h1 {
@@ -41,10 +42,40 @@ h1 {
 h2 {
 	margin-top: 0;
 	letter-spacing: 1px;
-	font-weight: 300;
+	font-weight: 100;
 }
 
-.create {
+.error {
+	color: #ff4949;
+	font-weight: 200;
+}
+
+#submit {
+	background: white;
+	margin-top: 20px;
+	width: 150px;
+	height: 40px;
+	text-align: center;
+	padding: 10px 0px 10px 0px;
+	border: 1px solid #4aa3ff;
+	border-radius: 10px;
+	transition: background 0.1s linear;
+	text-decoration: none;
+	color: #4aa3ff;
+	font-size: 1.2em;
+	transition: color 0.1s linear;
+	letter-spacing: 1px;
+	line-height: 20px;
+}
+
+#submit:hover {
+	background: #4aa3ff;
+	color: white;
+}
+
+.btn {
+	background: white;
+	margin-top: 20px;
 	width: 150px;
 	height: 20px;
 	text-align: center;
@@ -52,21 +83,17 @@ h2 {
 	border: 1px solid #4aa3ff;
 	border-radius: 10px;
 	transition: background 0.1s linear;
-}
-
-.create:hover {
-	background: #4aa3ff;
-}
-
-.create a {
 	text-decoration: none;
 	color: #4aa3ff;
 	font-size: 1.2em;
-	font-weight: 100;
 	transition: color 0.1s linear;
+	letter-spacing: 1px;
+	line-height: 20px;
+	font-weight: 100;
 }
 
-.create a:hover {
+.btn:hover {
+	background: #4aa3ff;
 	color: white;
 }
 
@@ -103,7 +130,7 @@ h2 {
 	font-size: 1.5em;
 	font-weight: 100;
 	line-height: 80px;
-	line-spacing: 1px;
+	letter-spacing: 1px;
 	height: 100%;
 	width: 100%;
 	color: white;
@@ -135,13 +162,20 @@ h2 {
 	float: left;
 }
 
-#header a {
+#header .button {
 	float: right;
-	margin-right: 20px;
+	padding: 0px 20px 0px 20px;
 	font-size: 1.2em;
 	font-weight: 100;
 	letter-spacing: 2px;
 	text-decoration: none;
+	transition: background 0.3s linear;
+	transition: color 0.1s linear;
+}
+
+#header .button:hover {
+	background: #e2e2e2;
+	color: #fff;
 }
 
 #content {
@@ -158,8 +192,10 @@ h2 {
 
 #form {
 	font-weight: 200;
+	font-size: 1em;
 }
 
-#post_title, #post_body {
+#user_username, #user_password {
 	width: 150px;
+	font-size: 1em;
 }

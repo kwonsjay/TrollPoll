@@ -1,6 +1,7 @@
 class PollsController < ApplicationController
   def index
-    @polls = Poll.where(:user_id => current_user.id)
+    @polls = []
+    @polls = Poll.where(:user_id => current_user.id) if !!current_user
     render :json => @polls
   end
   

@@ -4,17 +4,36 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 	},
 	
 	routes: {
+		"": "root",
 		"login": "loginUser",
-		"index": "pollIndex"
+		"index": "pollIndex",
+		"signup": "registerUser"
+	},
+	
+	root: function() {
+		var newRootView = new TrollPoll.Views.RootView({
+			
+		});
+		this._switchView(newRootView);
+		this.$content.html(newRootView.render().$el);
 	},
 	
 	loginUser: function() {
-		var newLogIn = new TrollPoll.Views.LogIn({
+		var newLoginView = new TrollPoll.Views.LoginView({
 		});
+		this._switchView(newLoginView);
+		this.$content.html(newLoginView.render().$el);
+	},
+	
+	registerUser: function() {
+		var newUserCreation = new TrollPoll.Views.UserCreation({
+			
+		});
+		this._switchView(newUserCreation);
+		this.$content.html(newUserCreation.render().$el);
 	},
 	
 	pollIndex: function() {
-		console.log("INININININI");
 		var newPollIndex = new TrollPoll.Views.PollIndex({
 			collection: TrollPoll.polls
 		});
