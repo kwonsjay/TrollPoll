@@ -10,12 +10,10 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 	
 	submitPoll: function(event) {
 		event.preventDefault();
-		
 		var that = this;
 		var formData = $(event.currentTarget).serializeJSON();
 		console.log(formData);
 		var newPoll = new TrollPoll.Models.Poll(formData.poll, {parse: true});
-		
 		if (!newPoll.isValid()) {
 			that.$(".errormsg").empty();
 			newPoll.validationError.forEach(function(errorMessage) {
@@ -27,12 +25,9 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 		newPoll.save({}, {
 			success: function(data) {
 				console.log("poll data set!");
-				TrollPoll.polls.add(newPoll, {
-					success: function() {
-						console.log("FIX THIS LATER");
-						Backbone.history.navigate("/index", {trigger: true});
-					}
-				});
+				TrollPoll.polls.add(newPoll)
+				console.log("FIX THIS LATER");
+				Backbone.history.navigate("/index", {trigger: true});
 			},
 			error: function(xhr, status, error) {
 				that.$(".errormsg").empty();

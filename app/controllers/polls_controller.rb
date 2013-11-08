@@ -20,6 +20,17 @@ class PollsController < ApplicationController
     end
   end
   
+  def destroy
+    @poll = Poll.find(params[:id])
+    if @poll.destroy
+      render :json => {}
+    else
+      render @poll.errors.full_messages, :status => 422
+    end
+  end
+  
+  
+  
   def show
     @poll = Poll.find(params[:id])
     render :json => @poll

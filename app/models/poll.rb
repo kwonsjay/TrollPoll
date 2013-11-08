@@ -4,7 +4,8 @@ class Poll < ActiveRecord::Base
   validates :private, :inclusion => {in: [true, false]}
   
   belongs_to :user
-  has_many :responses, :inverse_of => :poll
+  has_many :responses, :inverse_of => :poll, :dependent => :destroy
+  has_many :favorites, :dependent => :destroy
   
   def favorited
     Favorite.exists?(:poll_id => self.id)

@@ -47,6 +47,9 @@ TrollPoll.Models.Poll = Backbone.Model.extend({
 	},
 	
 	parse: function(serverAttributes, options) {
+		console.log("I GOT THIS FAR");
+		console.log(serverAttributes.responses);
+		window.responses = serverAttributes.responses;
 		this.pollResponses().reset(serverAttributes.responses);
 		delete serverAttributes.responses;
 		return serverAttributes;

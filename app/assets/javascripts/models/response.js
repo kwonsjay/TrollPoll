@@ -1,4 +1,4 @@
-TrollPoll.Models.Reponse = Backbone.Model.extend({
+TrollPoll.Models.Response = Backbone.Model.extend({
 	initialize: function(options) {
 		this.poll = options.poll;
 	},

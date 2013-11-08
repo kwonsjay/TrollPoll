@@ -3,15 +3,11 @@ class FavoritesController < ApplicationController
     @favorites = Favorite.where(:user_id => current_user.id)
     render :json => @favorites
   end
-  # 
-  # def show
-  #   @favorite = Favorite.find_by_poll_id_and_user_id(params[:poll_id], current_user.id)
-  #   render :json => @favorite
-  # end
   
   def create
     @favorite = current_user.favorites.build(params[:favorite])
     @favorite.poll_id = params[:poll_id]
+    p @favorite
     if @favorite.save
       render :json => {
         :favorite_count => Favorite.where(:poll_id => params[:poll_id]).count

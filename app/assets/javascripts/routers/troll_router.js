@@ -15,52 +15,28 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 	root: function() {
 		var newRootView = new TrollPoll.Views.RootView();
 		this._switchView(newRootView);
-		this.$content.html(newRootView.render().$el);
 	},
 	
 	loginUser: function() {
-		var newLoginView = new TrollPoll.Views.LoginView({
-		});
+		var newLoginView = new TrollPoll.Views.LoginView();
 		this._switchView(newLoginView);
-		this.$content.html(newLoginView.render().$el);
 	},
 	
 	registerUser: function() {
-		var newUserCreation = new TrollPoll.Views.UserCreation({
-			
-		});
+		var newUserCreation = new TrollPoll.Views.UserCreation();
 		this._switchView(newUserCreation);
-		this.$content.html(newUserCreation.render().$el);
 	},
 	
 	createPoll: function() {
-		var newPollCreation = new TrollPoll.Views.PollCreation({
-			
-		});
+		var newPollCreation = new TrollPoll.Views.PollCreation();
 		this._switchView(newPollCreation);
-		this.$content.html(newPollCreation.render().$el);
 	},
 	
 	displayPoll: function(id) {
-		var that = this;
-		var newFavorite = new TrollPoll.Models.Favorite({poll_id: id});
-		newFavorite.fetch({
-			success: function(model) {
-				var favoritable;
-				if (!model.id) {
-					favoritable = true;
-				}
-				else {
-					favoritable = false;
-				}
-				var newPollDetail = new TrollPoll.Views.PollDetail({
-					model: TrollPoll.polls.get(id),
-					favoritable: favoritable
-				});
-				that._switchView(newPollDetail);
-				that.$content.html(newPollDetail.render().$el);
-			}
+		var newPollDetail = new TrollPoll.Views.PollDetail({
+			model: TrollPoll.polls.get(id)
 		});
+		this._switchView(newPollDetail);
 	},
 	
 	pollIndex: function() {

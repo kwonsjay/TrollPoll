@@ -1,8 +1,18 @@
+<% var counter = 1; %>
+<h2>Written by: <%= poll.get('user_id') %></h2>
+<h1>Question:</h1>
 <h2><%= poll.get('question') %></h2>
-<p>Written by: <%= poll.get('user_id') %></p>
-<% if (favoritable) { %>
+<h1>Answer Choices:</h1>
+<% poll._pollResponses.each(function(response) { %>
+	<h2><%= counter %>: <%= response.get('answer') %></h2>
+	<% counter++  %>
+<% }); %>
+<% if (!poll.get('favorited')) { %>
 <div class="btn favorite">Favorite</div>
 <% } else { %>
 <div class="btn unfavorite">Unfavorite</div>
 <% } %>
+<div class="btn delete">Delete</div>
+<div class="btn edit">Edit</div>
+<br>
 <div class="btn index">Poll Index</div>

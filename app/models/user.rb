@@ -9,8 +9,8 @@ class User < ActiveRecord::Base
 
   after_initialize :ensure_session_token
   
-  has_many :polls
-  has_many :favorites
+  has_many :polls, :dependent => :destroy
+  has_many :favorites, :dependent => :destroy
 
   def self.find_by_credentials(username, password)
     user = User.find_by_username(username)

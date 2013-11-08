@@ -1,7 +1,6 @@
 TrollPoll.Views.PollDetail = Backbone.View.extend({
 	initialize: function(options) {
-		this.favoritable = options.favoritable;
-		this.listenTo(this.model, "add change remove", this.render);
+		this.listenTo(this.model, "add change remove sync", this.render);
 	},
 	
 	template: JST['poll/detail'],
@@ -9,14 +8,14 @@ TrollPoll.Views.PollDetail = Backbone.View.extend({
 	events: {
 		"click .favorite": "favoritePoll",
 		"click .unfavorite": "unfavoritePoll",
-		"click .index": "returnIndex"
+		"click .index": "returnIndex",
+		"click .delete": "deletePoll",
+		"click .edit": "editPoll"
 	},
 
 	render: function() {
-		console.log(this.favoritable);
 		var renderedContent = this.template({
 			poll: this.model,
-			favoritable: this.favoritable
 		});
 
 		this.$el.html(renderedContent);
@@ -28,32 +27,22 @@ TrollPoll.Views.PollDetail = Backbone.View.extend({
 	},
 
 	favoritePoll: function() {
-		var that = this;
-		newFavorite = new TrollPoll.Models.Favorite({poll_id: this.model.id});
-		newFavorite.save({}, {
-			url: "polls/" + this.model.id + "/favorite",
+		this.model.favorite();
+	},
+	
+	unfavoritePoll: function() {
+		this.model.unfavorite();
+	},
+	
+	deletePoll: function() {
+		this.model.destroy({
 			success: function() {
-				that.model._pollFavorites.add(newFavorite);
-				that.favoritable = false;
-				console.log("success");
-				that.render();
-			},
-			error: function() {
-				alert("Saving favorite didn't work");
+				Backbone.history.navigate("/index", {trigger: true});
 			}
 		});
 	},
 	
-	unfavoritePoll: function() {
-		var that = this;
-		$.ajax({
-			type: "DELETE",
-			url: "/polls/" + this.model.id + "/favorite",
-			success: function(data) {
-				that.favoritable = true;
-				console.log("YIIIIIIII");
-				that.render()
-			}
-		});
+	editPoll: function() {
+		console.log("In Edit View");
 	}
 });
