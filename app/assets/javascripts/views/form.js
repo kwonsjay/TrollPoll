@@ -9,9 +9,8 @@ TrollPoll.Views.UserCreation = Backbone.View.extend({
 		event.preventDefault();
 		var that = this;
 		var formData = $(event.currentTarget).serializeJSON();
-		console.log(formData);
-		var user = new TrollPoll.Models.User(formData);
-		user.save({}, {
+		var newUser = new TrollPoll.Models.User(formData);
+		newUser.save({}, {
 			success: function(data) {
 				TrollPoll.currentUser.set(data);
 				console.log("signup data set!");

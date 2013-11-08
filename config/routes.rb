@@ -1,11 +1,10 @@
 TrollPoll::Application.routes.draw do
-  resources :users do
-    resources :favorites, :only => [:index]
-  end
+  resources :users
   resources :polls, :only => [:index, :create, :show, :destroy] do
     resources :responses, :only => [:create, :update]
-    resource :favorite, :only => [:create, :destroy]
+    resource :favorite, :only => [:create, :destroy, :show]
   end
+  resources :favorites, :only => [:index]
   resource :session, :only => [:create, :destroy, :new]
   root :to => "static#root"
 end

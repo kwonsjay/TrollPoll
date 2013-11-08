@@ -5,5 +5,17 @@ class Poll < ActiveRecord::Base
   
   belongs_to :user
   has_many :responses, :inverse_of => :poll
-  has_one :favorite
+  
+  def favorited
+    Favorite.exists?(:poll_id => self.id)
+  end
+  
+  def favorite_count
+    Favorite.where(:poll_id => self.id).count
+  end
+  
+  def as_json(options)
+    super(:include => [:responses], :methods => [:favorited, :favorite_count])
+  end
+  
 end

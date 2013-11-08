@@ -1,0 +1,8 @@
+<h2><%= poll.get('question') %></h2>
+<p>Written by: <%= poll.get('user_id') %></p>
+<% if (favoritable) { %>
+<div class="btn favorite">Favorite</div>
+<% } else { %>
+<div class="btn unfavorite">Unfavorite</div>
+<% } %>
+<div class="btn index">Poll Index</div>

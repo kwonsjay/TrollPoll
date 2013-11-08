@@ -45,6 +45,16 @@ h2 {
 	font-weight: 100;
 }
 
+h3 {
+	letter-spacing: 1px;
+	font-size: 1em;
+	font-weight: 200;
+}
+
+h3 a{
+	text-decoration: none;
+}
+
 .error {
 	color: #ff4949;
 	font-weight: 200;

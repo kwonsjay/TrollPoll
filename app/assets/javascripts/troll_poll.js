@@ -4,11 +4,16 @@ window.TrollPoll = {
   Views: {},
   Routers: {},
   initialize: function() {
+		var currentUser = JSON.parse($("#bootstrapped_user").html());
+		TrollPoll.currentUser = new TrollPoll.Models.User(currentUser.user);
     TrollPoll.polls = new TrollPoll.Collections.Polls();
-		TrollPoll.currentUser = new TrollPoll.Models.User();
+		TrollPoll.polls.fetch({
+			success: function() {
+				new TrollPoll.Routers.TrollRouter($("#content"));
+				Backbone.history.start();
+			}
+		});
 		this._installHeader($("#header"));
-		new TrollPoll.Routers.TrollRouter($("#content"));
-		Backbone.history.start();		
   },
 	_installHeader: function($header) {
 		var newheaderView = new TrollPoll.Views.HeaderView({
