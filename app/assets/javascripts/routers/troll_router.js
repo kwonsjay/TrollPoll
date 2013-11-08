@@ -9,7 +9,9 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 		"index": "pollIndex",
 		"signup": "registerUser",
 		"polls/new": "createPoll",
-		"polls/:id": "displayPoll"
+		"polls/:id": "displayPoll",
+		"users/:id": "editUser",
+		"users/:id/polls": "pollIndex"
 	},
 	
 	root: function() {

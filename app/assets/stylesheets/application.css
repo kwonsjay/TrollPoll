@@ -55,6 +55,16 @@ h3 a{
 	text-decoration: none;
 }
 
+.favs {
+	margin-top: 50px;
+	color: #ff6060;
+}
+
+.right {
+	float: right;
+	display: inline-block;
+}
+
 .error {
 	color: #ff4949;
 	font-weight: 200;

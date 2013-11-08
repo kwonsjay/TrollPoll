@@ -4,9 +4,13 @@
 <h2><%= poll.get('question') %></h2>
 <h1>Answer Choices:</h1>
 <% poll._pollResponses.each(function(response) { %>
-	<h2><%= counter %>: <%= response.get('answer') %></h2>
+	<h2>
+		<%= counter %>: <%= response.get('answer') %>
+		<span class="right">Votes: <%= response.get('votes') %></span>
+	</h2>
 	<% counter++  %>
 <% }); %>
+<h2 class="favs">Favorites: <%= poll.get('favorite_count') %></h2>
 <% if (!poll.get('favorited')) { %>
 <div class="btn favorite">Favorite</div>
 <% } else { %>
