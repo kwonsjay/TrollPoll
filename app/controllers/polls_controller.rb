@@ -1,7 +1,6 @@
 class PollsController < ApplicationController
   def index
-    @polls = []
-    @polls = Poll.where(:user_id => current_user.id) if !!current_user
+    @polls = Poll.all
     render :json => @polls
   end
   
@@ -29,7 +28,14 @@ class PollsController < ApplicationController
     end
   end
   
-  
+  def update
+    @poll = Poll.find(params[:id])
+    if @poll.update_attributes(params[:poll])
+      render :json => @poll
+    else
+      render @poll.errors.full_messages, :status => 422
+    end
+  end
   
   def show
     @poll = Poll.find(params[:id])

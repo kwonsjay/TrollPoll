@@ -1,4 +1,4 @@
-<h2>Previous Polls</h2>
+<h2><%= title %> Polls</h2>
 <div class="btn">New Poll</div>
 <% polls.each(function(poll) { %>
 	<h3><a href="#/polls/<%= poll.get('id') %>"><%= poll.get('question') %></a></h3>

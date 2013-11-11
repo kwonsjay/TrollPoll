@@ -1,5 +1,6 @@
 TrollPoll.Views.PollDetail = Backbone.View.extend({
 	initialize: function(options) {
+		this.check = options.check;
 		this.listenTo(this.model, "add change remove sync", this.render);
 	},
 	
@@ -15,7 +16,7 @@ TrollPoll.Views.PollDetail = Backbone.View.extend({
 
 	render: function() {
 		var renderedContent = this.template({
-			poll: this.model,
+			poll: this.model
 		});
 
 		this.$el.html(renderedContent);
@@ -43,6 +44,6 @@ TrollPoll.Views.PollDetail = Backbone.View.extend({
 	},
 	
 	editPoll: function() {
-		console.log("In Edit View");
+		Backbone.history.navigate("/polls/" + this.model.id + "/edit", {trigger: true});
 	}
 });

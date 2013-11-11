@@ -10,8 +10,9 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 		"signup": "registerUser",
 		"polls/new": "createPoll",
 		"polls/:id": "displayPoll",
-		"users/:id": "editUser",
-		"users/:id/polls": "pollIndex"
+		"polls/:id/edit": "editPoll",
+		"users/:id/edit": "editUser",
+		"users/:id/polls": "userPolls"
 	},
 	
 	root: function() {
@@ -20,32 +21,87 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 	},
 	
 	loginUser: function() {
-		var newLoginView = new TrollPoll.Views.LoginView();
-		this._switchView(newLoginView);
+		if (!this.userIru()) {
+			var newLoginView = new TrollPoll.Views.LoginView();
+			this._switchView(newLoginView);
+		}
+		else {
+			var cuid = TrollPoll.currentUser.id;
+			Backbone.history.navigate("/users/" + cuid + "/polls", {trigger: true});
+		}
 	},
 	
 	registerUser: function() {
-		var newUserCreation = new TrollPoll.Views.UserCreation();
-		this._switchView(newUserCreation);
+		if (!this.userIru()) {
+			var newUserCreation = new TrollPoll.Views.UserCreation();
+			this._switchView(newUserCreation);
+		}
+		else {
+			var cuid = TrollPoll.currentUser.id;
+			Backbone.history.navigate("/users/" + cuid + "/polls", {trigger: true});
+		}
 	},
 	
 	createPoll: function() {
-		var newPollCreation = new TrollPoll.Views.PollCreation();
-		this._switchView(newPollCreation);
+		if (this.userIru()) {
+			var newPollCreation = new TrollPoll.Views.PollCreation();
+			this._switchView(newPollCreation);
+		}
+		else {
+			Backbone.history.navigate("/", {trigger: true});
+		}
 	},
 	
 	displayPoll: function(id) {
 		var newPollDetail = new TrollPoll.Views.PollDetail({
-			model: TrollPoll.polls.get(id)
+			model: TrollPoll.polls.get(id),
 		});
 		this._switchView(newPollDetail);
 	},
 	
 	pollIndex: function() {
+		var polls = TrollPoll.polls.where({private: false});
+		var newCollection = new TrollPoll.Collections.Polls(polls);
 		var newPollIndex = new TrollPoll.Views.PollIndex({
-			collection: TrollPoll.polls
+			collection: newCollection,
+			title: "Public"
 		});
 		this._switchView(newPollIndex);
+	},
+	
+	userPolls: function(id) {
+		var cuid = TrollPoll.currentUser.id;
+		var polls = TrollPoll.polls.where({user_id: cuid});
+		var newCollection = new TrollPoll.Collections.Polls(polls);
+		var newPollIndex = new TrollPoll.Views.PollIndex({
+			collection: newCollection,
+			title: "My"
+		});
+		this._switchView(newPollIndex);
+	},
+	
+	editPoll: function(id) {
+		var cuid = TrollPoll.currentUser.id;
+		var poll = TrollPoll.polls.get(id);
+		if (this.userIru() && poll.get('user_id') == cuid) {
+			var newPollEdit = new TrollPoll.Views.PollEdit({
+				model: poll
+			});
+			this._switchView(newPollEdit);
+		}
+		else {
+			Backbone.history.navigate("/polls/" + id, {trigger: true});
+		}
+	},
+	
+	editUser: function(id) {
+		var newUserDetail = new TrollPoll.Views.UserDetail();
+		this._switchView(newUserDetail);
+	},
+	
+	userIru: function() {
+		var cuid = TrollPoll.currentUser.id;
+		return !!cuid;
 	},
 	
 	_switchView: function(newView) {

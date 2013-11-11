@@ -1,5 +1,5 @@
-TrollPoll.Views.PollCreation = Backbone.View.extend({
-	pollTemplate: JST["poll/form"],
+TrollPoll.Views.PollEdit = Backbone.View.extend({
+	pollTemplate: JST["poll/edit"],
 	responseTemplate: JST["poll/response"],
 	counter: 0,
 	
@@ -12,18 +12,22 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 		event.preventDefault();
 		var that = this;
 		var formData = $(event.currentTarget).serializeJSON();
-		var newPoll = new TrollPoll.Models.Poll(formData.poll, {parse: true});
-		if (!newPoll.isValid()) {
+		console.log(formData);
+		this.model.set(formData.poll);
+		window.testing = formData.poll.responses;
+		
+		// this.model.pollResponses().reset(formData.poll.responses);
+		console.log(this.model.pollResponses());
+		if (!this.model.isValid()) {
 			that.$(".errormsg").empty();
-			newPoll.validationError.forEach(function(errorMessage) {
+			this.model.validationError.forEach(function(errorMessage) {
 				that.$(".errormsg").append("<p>" + errorMessage + "</p>");
 			});
 			return;
 		}
 		
-		newPoll.save({}, {
+		this.model.save({}, {
 			success: function(data) {
-				TrollPoll.polls.add(newPoll)
 				Backbone.history.navigate("/index", {trigger: true});
 			},
 			error: function(xhr, status, error) {
@@ -33,22 +37,27 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 		});
 	},
 	
-	renderResponse: function() {
+	renderResponse: function(answer) {
+		var response = typeof answer != 'string' ? "" : answer;
 		var renderedContent = this.responseTemplate({
 			count: this.counter,
-			answer: ""
+			answer: response
 		});
 
 		this.$el.find('form').append(renderedContent);
 		this.counter += 1;
-		return this;
 	},
 	
 	render: function() {
+		var that = this;
 		var renderedContent = this.pollTemplate({
-			title: "New Poll"
+			title: "Edit Poll",
+			poll: this.model
 		});
 		this.$el.html(renderedContent);
+		this.model._pollResponses.each(function(response) {
+			that.renderResponse(response.get('answer'));
+		});
 		return this;
 	}
 });

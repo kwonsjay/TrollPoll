@@ -9,9 +9,7 @@ class FavoritesController < ApplicationController
     @favorite.poll_id = params[:poll_id]
     p @favorite
     if @favorite.save
-      render :json => {
-        :favorite_count => Favorite.where(:poll_id => params[:poll_id]).count
-      }
+      render :json => @favorite
     else
       render :json => @favorite.errors.full_messages, :status => 422
     end
@@ -20,9 +18,7 @@ class FavoritesController < ApplicationController
   def destroy
     @favorite = Favorite.find_by_poll_id_and_user_id(params[:poll_id], current_user.id)
     if @favorite.destroy
-      render :json => {
-        :favorite_count => Favorite.where(:poll_id => params[:poll_id]).count
-      }
+      render :json => {}
     else
       render :json => "Request Failed.", :status => 422
     end

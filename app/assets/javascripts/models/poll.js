@@ -13,30 +13,34 @@ TrollPoll.Models.Poll = Backbone.Model.extend({
 	
 	favorite: function() {
 		var that = this;
+		var cuid = TrollPoll.currentUser.id;
+		this.pollFavorites().create({poll_id: this.id, user_id: cuid}, {
+			wait: true,
+			success: function() {
+				that.set("favorite_count", that.get("favorite_count") + 1);
+			}
+		});
 		
-    $.ajax({
-      type: "POST",
-      url: "/polls/" + that.id + "/favorite",
-      
-      success: function (data) {
-        that.set("favorited", true);
-        that.set("favorite_count", data.favorite_count)
-      }
-    });
 	},
 	
 	unfavorite: function() {
 		var that = this;
-		
-    $.ajax({
-      type: "DELETE",
-      url: "/polls/" + that.id + "/favorite",
-      
-      success: function (data) {
-        that.set("favorited", false);
-        that.set("favorite_count", data.favorite_count)
-      }
-    });
+		var cuid = TrollPoll.currentUser.id;
+		console.log("DELETING THIS");
+		console.log(this.pollFavorites().findWhere({poll_id: this.id, user_id: cuid}));
+		this.pollFavorites().findWhere({poll_id: this.id, user_id: cuid}).destroy({
+			wait: true,
+			success: function() {
+				that.set("favorite_count", that.get("favorite_count") - 1);
+			}
+		});
+	},
+	
+	pollFavorites: function() {
+		if (!this._pollFavorites) {
+			this._pollFavorites = new TrollPoll.Collections.PollFavorites([], {poll: this});
+		}
+		return this._pollFavorites;
 	},
 	
 	pollResponses: function() {
@@ -47,18 +51,16 @@ TrollPoll.Models.Poll = Backbone.Model.extend({
 	},
 	
 	parse: function(serverAttributes, options) {
-		console.log("I GOT THIS FAR");
-		console.log(serverAttributes.responses);
-		window.responses = serverAttributes.responses;
 		this.pollResponses().reset(serverAttributes.responses);
+		this.pollFavorites().reset(serverAttributes.favorites);
 		delete serverAttributes.responses;
+		delete serverAttributes.favorites;
 		return serverAttributes;
 	},
 	
 	toJSON: function() {
 		var formData = _.extend({}, this.attributes);
 		formData.responses = this.pollResponses().toJSON();
-		delete formData.favorited;
 		delete formData.favorite_count;
 		return formData;
 	}

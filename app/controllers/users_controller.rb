@@ -1,6 +1,4 @@
 class UsersController < ApplicationController
-  # before_filter :require_current_user!, :only => [:show]
-  # before_filter :require_no_current_user!, :only => [:create, :new]
 
   def create
     @user = User.new(params[:user])
@@ -17,13 +15,28 @@ class UsersController < ApplicationController
     @user = User.new
     render :new
   end
-
-  def show
-    if params.include?(:id)
-      @user = User.find(params[:id])
-      render :show
+  
+  def update
+    @user = User.find(params[:id])
+    if @user.update_attributes(params[:user])
+      render :json => @user
     else
-      render :json => "User not found."
+      render :json => @user.errors.full_messages, :status => 422
     end
   end
+
+  def show
+    @user = User.find(params[:id])
+    render :json => @user
+  end
+  
+  def destroy
+    @user = User.find(params[:id])
+    if @user.destroy
+      render :json => {}
+    else
+      render :json => @user.errors.full_messages, :status => 422
+    end
+  end
+  
 end

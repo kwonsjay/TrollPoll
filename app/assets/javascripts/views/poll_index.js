@@ -5,7 +5,8 @@ TrollPoll.Views.PollIndex = Backbone.View.extend({
 		"click .btn": "newPoll"
 	},
 	
-	initialize: function() {
+	initialize: function(options) {
+		this.title = options.title;
 		this.listenTo(this.collection, "change add reset remove", this.render);
 	},
 	
@@ -15,7 +16,8 @@ TrollPoll.Views.PollIndex = Backbone.View.extend({
 	
 	render: function() {
 		var renderedContent = this.template({
-			polls: this.collection
+			polls: this.collection,
+			title: this.title
 		});
 		this.$el.html(renderedContent);
 		return this;

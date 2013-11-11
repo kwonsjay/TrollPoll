@@ -11,12 +11,16 @@
 	<% counter++  %>
 <% }); %>
 <h2 class="favs">Favorites: <%= poll.get('favorite_count') %></h2>
-<% if (!poll.get('favorited')) { %>
-<div class="btn favorite">Favorite</div>
+<% var cuid = TrollPoll.currentUser.id %>
+<% if (poll.get('user_id') != cuid) { %>
+	<% if (poll._pollFavorites.where({user_id: cuid}).length == 0) { %>
+		<div class="btn favorite">Favorite</div>
+	<% } else { %>
+		<div class="btn unfavorite">Unfavorite</div>
+	<% } %>
 <% } else { %>
-<div class="btn unfavorite">Unfavorite</div>
-<% } %>
 <div class="btn delete">Delete</div>
 <div class="btn edit">Edit</div>
+<% } %>
 <br>
 <div class="btn index">Poll Index</div>
