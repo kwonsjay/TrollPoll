@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20131106181859) do
+ActiveRecord::Schema.define(version: 20131112003418) do
 
   create_table "favorites", force: true do |t|
     t.integer  "poll_id",    null: false
@@ -51,5 +51,17 @@ ActiveRecord::Schema.define(version: 20131106181859) do
   end
 
   add_index "users", ["username"], name: "index_users_on_username", unique: true
+
+  create_table "votes", force: true do |t|
+    t.string   "number",      null: false
+    t.integer  "response_id", null: false
+    t.integer  "poll_id",     null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "votes", ["number"], name: "index_votes_on_number"
+  add_index "votes", ["poll_id"], name: "index_votes_on_poll_id"
+  add_index "votes", ["response_id"], name: "index_votes_on_response_id"
 
 end

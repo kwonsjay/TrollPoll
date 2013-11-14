@@ -4,14 +4,17 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 	counter: 0,
 	
 	events: {
-		"submit form": "submitPoll",
-		"click .add_response": "renderResponse"
+		// "submit form": "submitPoll",
+		"click .submit": "submitPoll",
+		"click .add_response": "renderResponse",
+		"click .return": "returnIndex",
+		"click .remove": "removeResponse"
 	},
 	
 	submitPoll: function(event) {
 		event.preventDefault();
 		var that = this;
-		var formData = $(event.currentTarget).serializeJSON();
+		var formData = $("#form").serializeJSON();
 		var newPoll = new TrollPoll.Models.Poll(formData.poll, {parse: true});
 		if (!newPoll.isValid()) {
 			that.$(".errormsg").empty();
@@ -42,6 +45,15 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 		this.$el.find('form').append(renderedContent);
 		this.counter += 1;
 		return this;
+	},
+	
+	returnIndex: function() {
+		Backbone.history.navigate("/index", {trigger: true});
+	},
+	
+	removeResponse: function(event) {
+		var clicked = ".answer_" + $(event.currentTarget).attr("data-id");
+		$(clicked).effect("drop", 500);
 	},
 	
 	render: function() {

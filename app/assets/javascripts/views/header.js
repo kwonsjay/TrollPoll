@@ -3,7 +3,8 @@ TrollPoll.Views.HeaderView = Backbone.View.extend({
 	
 	events: {
 		"click .signin": "signIn",
-		"click .signout": "signOut"
+		"click .signout": "signOut",
+		"click .profile": "viewUser"
 	},
 	
 	initialize: function() {
@@ -29,8 +30,11 @@ TrollPoll.Views.HeaderView = Backbone.View.extend({
 		});
 	},
 	
+	viewUser: function() {
+		Backbone.history.navigate("/users/" + TrollPoll.currentUser.id, {trigger: true});
+	},
+	
 	render: function() {
-		console.log('rendering');
 		var renderedContent = this.template({
 			model: this.model
 		});

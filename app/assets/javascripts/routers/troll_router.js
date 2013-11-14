@@ -11,6 +11,7 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 		"polls/new": "createPoll",
 		"polls/:id": "displayPoll",
 		"polls/:id/edit": "editPoll",
+		"users/:id": "viewUser",
 		"users/:id/edit": "editUser",
 		"users/:id/polls": "userPolls"
 	},
@@ -42,6 +43,19 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 		}
 	},
 	
+	viewUser: function(id) {
+		if (this.userIru() && id == TrollPoll.currentUser.id) {
+			var newUserView = new TrollPoll.Views.UserView({
+				model: TrollPoll.currentUser
+			});
+			this._switchView(newUserView);
+		}
+		else {
+			Backbone.history.navigate("/index", {trigger: true});
+			this.invalidPermissions();
+		}
+	},
+	
 	createPoll: function() {
 		if (this.userIru()) {
 			var newPollCreation = new TrollPoll.Views.PollCreation();
@@ -53,10 +67,16 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 	},
 	
 	displayPoll: function(id) {
-		var newPollDetail = new TrollPoll.Views.PollDetail({
-			model: TrollPoll.polls.get(id),
-		});
-		this._switchView(newPollDetail);
+		var poll = TrollPoll.polls.get(id);
+		if (!!poll) {
+			var newPollDetail = new TrollPoll.Views.PollDetail({
+				model: poll,
+			});
+			this._switchView(newPollDetail);
+			if (poll.get('voted')) {
+				newPollDetail.drawChart();
+			}
+		}
 	},
 	
 	pollIndex: function() {
@@ -110,5 +130,9 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 		}
 		this._prevView = newView;
 		this.$content.html(newView.render().$el);
+	},
+	
+	invalidPermissions: function() {
+		$("#errors").html("<i class='icon-ios7-locked'></i>").fadeIn("slow").delay(2000).fadeOut("slow");
 	}
 });

@@ -2,7 +2,7 @@ TrollPoll.Views.PollIndex = Backbone.View.extend({
 	template: JST["poll/index"],
 	
 	events: {
-		"click .btn": "newPoll"
+		"click .create": "newPoll"
 	},
 	
 	initialize: function(options) {

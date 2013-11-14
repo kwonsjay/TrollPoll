@@ -1,16 +1,31 @@
-<% var counter = 1; %>
-<h2>Written by: <%= poll.get('user_id') %></h2>
+<div class="viewchanger">
+	<div class="view donut">Donut
+	</div>
+	<div class="view bar">Bar
+	</div>
+</div>
+<h1>TXT ID to POLL-944-049 ( 7655 944 049 )</h1>
 <h1>Question:</h1>
 <h2><%= poll.get('question') %></h2>
 <h1>Answer Choices:</h1>
-<% poll._pollResponses.each(function(response) { %>
-	<h2>
-		<%= counter %>: <%= response.get('answer') %>
-		<span class="right">Votes: <%= response.get('votes') %></span>
-	</h2>
-	<% counter++  %>
-<% }); %>
-<h2 class="favs">Favorites: <%= poll.get('favorite_count') %></h2>
+<div class="container">
+	<div class="pollinfo">
+	<% poll._pollResponses.each(function(response) { %>
+		<div class="response txt_<%= response.get('id') %>">
+			<div class="colorblk blk_<%= response.get('id') %>"><%= response.get('vote_count') %></div>
+			
+			<span class="lpadsm left"><%= response.get('answer') %></span>
+			<span class="lpadlg right">TXT ID: <%= response.get('id') %></span>
+		</div>
+		<br>
+	<% }); %>
+	</div>
+	<div id="chartspace">
+		<h2>No Data</h2>
+	</div>
+</div>
+<div class="btncollection">
+<h2 class="favs"><i class="icon-ios7-heart"><%= poll.get('favorite_count') %></i></h2>
 <% var cuid = TrollPoll.currentUser.id %>
 <% if (poll.get('user_id') != cuid) { %>
 	<% if (poll._pollFavorites.where({user_id: cuid}).length == 0) { %>
@@ -24,3 +39,4 @@
 <% } %>
 <br>
 <div class="btn index">Poll Index</div>
+</div>

@@ -55,6 +55,103 @@ h3 a{
 	text-decoration: none;
 }
 
+label {
+	font-weight: 100;
+	font-size: 1.3em;
+	margin-left: 30px;
+}
+
+input {
+	font-weight: 100;
+	border-radius: 10px;
+	width: 60%;
+	font-size: 1.3em;
+	margin: 10px;
+	border: 2px solid #9099a3;
+	padding: 2px;
+	color: #9099a3;
+}
+
+i {
+	font-size: 1.2em;
+	float: right;
+	transition: color 0.1s linear;
+}
+
+i:hover {
+	color: #ff7b7b;
+}
+
+.favs i {
+	font-size: 2em;
+	float: none;
+}
+
+.inputbox {
+	margin-top: 20px;
+	display: block;
+	padding: 10px;
+	border-radius: 20px;
+	background: #404040;
+	color: white;
+}
+
+.resp {
+	margin: 5px 0px 0px 25px;
+	background: #5d5d5d;
+}
+
+.container {
+	display: block;
+	overflow: hidden;
+}
+
+.colorblk {
+	height: 30px;
+	width: 30px;
+	background: #404040;
+	display: inline-block;
+	margin: auto;	
+	text-align: center;
+	color: white;
+	border-radius: 50%;
+	float: left;
+}
+
+#chartspace {
+	width: 450px;
+	height: 450px;
+	float: left;
+	box-sizing: border-box;
+	display: inline-block;
+}
+
+.response {
+	width: 100%;
+	font-weight: 100;
+	border-radius: 5px;
+	letter-spacing: 1px;
+	font-size: 1.5em;
+	margin-top: 5px;
+	min-width: 300px;
+	max-width: 400px;
+	float: left;
+}
+
+.pollinfo {
+	padding-top: 20px;
+	margin-right: 50px;
+	display: inline-block;
+	box-sizing: border-box;
+	float: left;
+}
+
+#legend {
+	float: left;
+	display: inline-block;
+	box-sizing: border-box;
+}
+
 .favs {
 	margin-top: 50px;
 	color: #ff6060;
@@ -62,7 +159,22 @@ h3 a{
 
 .right {
 	float: right;
-	display: inline-block;
+}
+
+.left {
+	float: left;
+}
+
+.lpadsm {
+	padding-left: 10px;
+}
+
+.rpad {
+	padding-right: 30px;
+}
+
+.lpadlg {
+	padding-left: 40px;
 }
 
 .error {
@@ -72,16 +184,15 @@ h3 a{
 
 #submit {
 	background: white;
-	margin-top: 20px;
 	width: 150px;
 	height: 40px;
 	text-align: center;
 	padding: 10px 0px 10px 0px;
-	border: 1px solid #4aa3ff;
+	border: 1px solid #404040;
 	border-radius: 10px;
 	transition: background 0.1s linear;
 	text-decoration: none;
-	color: #4aa3ff;
+	color: #404040;
 	font-size: 1.2em;
 	transition: color 0.1s linear;
 	letter-spacing: 1px;
@@ -89,8 +200,22 @@ h3 a{
 }
 
 #submit:hover {
-	background: #4aa3ff;
+	background: #404040;
 	color: white;
+}
+
+.indextitlebar {
+	height: 100px;
+	display: block;
+	overflow: hidden;
+	border-bottom: 1px solid #e2e2e2;
+}
+
+.indextitlebar span{
+	max-width: 70%;
+	font-size: 1.5em;
+	font-weight: 100;
+	letter-spacing: 1px;
 }
 
 .btn {
@@ -100,21 +225,22 @@ h3 a{
 	height: 20px;
 	text-align: center;
 	padding: 10px 0px 10px 0px;
-	border: 1px solid #4aa3ff;
+	border: 1px solid #404040;
 	border-radius: 10px;
 	transition: background 0.1s linear;
 	text-decoration: none;
-	color: #4aa3ff;
+	color: #404040;
 	font-size: 1.2em;
 	transition: color 0.1s linear;
 	letter-spacing: 1px;
 	line-height: 20px;
 	font-weight: 100;
 	display: inline-block;
+	margin: auto;
 }
 
 .btn:hover {
-	background: #4aa3ff;
+	background: #404040;
 	color: white;
 }
 
@@ -127,12 +253,22 @@ h3 a{
 	display: block;
 	position: fixed;
 	height: 100%;
-	width: 350px;
+	width: 250px;
 	color: white;
-	background: #4aa3ff;
+	background: #404040;
 	text-decoration: none;
 	font-weight: 300;
 	z-index: 1;
+}
+
+#sidebar a {
+	display: block;
+	height: 250px;
+	margin-top: 30px;
+	text-align: center;
+	text-decoration: none;
+	font-size: 150px;
+	color: white;
 }
 
 #sidebar ul {
@@ -163,7 +299,7 @@ h3 a{
 }
 
 #sidebar ul li a:hover {
-	color: #4aa3ff;
+	color: #404040;
 	background: white;
 }
 
@@ -176,7 +312,7 @@ h3 a{
 }
 
 #header h1 {
-	margin-left: 400px;
+	margin-left: 300px;
 	font-size: 1.5em;
 	font-weight: 100;
 	letter-spacing: 2px;
@@ -201,13 +337,71 @@ h3 a{
 
 #content {
 	padding:30px 0px 100px 0px;
-	margin:0px 50px 0px 400px;
+	margin:0px 50px 0px 300px;
+}
+
+#footer {
+	height: 70px;
+	width: 100%;
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	border-top: 1px solid #e2e2e2;
+	line-height: 70px;
+	color: #9099a3;
+}
+
+.footspan {
+	float: right;
+	margin-right: 50px;
+	letter-spacing: 1px;
+	font-weight: 100;
+	font-size: 1.2em;
+	transition: color 0.3s linear;
+}
+
+.footspan:hover {
+	color: #404040;
+}
+
+.indexbox a {
+	display: block;
+	font-weight: 100;
+	font-size: 2em;
+	text-decoration: none;
+	text-align: center;
+	padding: 20px 0px 20px 20px;
+	color: #7c7c7c;
+	border-bottom: 1px solid #e2e2e2;
+	transition: background 0.2s ease;
+	transition: color 0.2s ease;
+}
+
+.indexbox a:hover {
+	background: #404040;
+	color: white;
 }
 
 #errors {
-	font-weight: 200;
+	width: 100%;
+	font-weight: 100;
 	letter-spacing: 1px;
 	color: red;
+}
+
+#errors p {
+	margin-left: 300px;
+	padding: 10px;
+	font-weight: 100;
+	font-size: 1.3em;
+	letter-spacing: 1px;
+	color: red;
+}
+
+#errors i {
+	margin: 50px 0px 0px 300px;
+	float: none;
+	font-size: 3em;
 }
 
 #form {
@@ -218,4 +412,33 @@ h3 a{
 #user_username, #user_password {
 	width: 150px;
 	font-size: 1em;
+}
+
+.viewchanger {
+	height: 70px;
+	border-bottom: 1px solid #e2e2e2;
+	margin-bottom: 30px;
+}
+
+.view {
+	line-height: 70px;
+	display: inline-block;
+	box-sizing: border-box;
+	width: 50%;
+	float: left;
+	text-align: center;
+	font-weight: 100;
+	font-size: 2em;
+	background: #eee;
+	transition: background 0.2s linear;
+	transition: color 0.2s linear;
+}
+
+.view:hover {
+	background: #f7f7f7;
+	color: #404040;
+}
+
+.bordright {
+	border-right: 1px solid #e2e2e2;
 }

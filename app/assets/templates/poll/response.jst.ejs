@@ -1,3 +1,5 @@
-<br>
-<label for="response_answer_<%= count %>">Answer</label>
-<input id="response_answer_<%= count %>" name="poll[responses][<%= count %>][answer]" value="<%= answer %>">
+<div class="inputbox resp answer_<%= count %>">
+	<label for="response_answer_<%= count %>">Answer</label>
+	<input id="response_answer_<%= count %>" name="poll[responses][<%= count %>][answer]" value="<%= answer %>">
+	<i class="icon-close remove" data-id="<%= count %>"></i>
+</div>

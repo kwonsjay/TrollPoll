@@ -2,7 +2,8 @@ TrollPoll.Views.LoginView = Backbone.View.extend({
 	template: JST["global/login"],
 	
 	events: {
-		"submit form": "submitSession"
+		// "submit form": "submitSession"
+		"click .submit": "submitSession"
 	},
 	
 	submitSession: function(event) {

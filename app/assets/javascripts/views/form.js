@@ -2,13 +2,14 @@ TrollPoll.Views.UserCreation = Backbone.View.extend({
 	template: JST["global/signup"],
 	
 	events: {
-		"submit form": "submitUser"
+		// "submit form": "submitUser",
+		"click .submit": "submitUser"
 	},
 	
 	submitUser: function(event) {
 		event.preventDefault();
 		var that = this;
-		var formData = $(event.currentTarget).serializeJSON();
+		var formData = $("#form").serializeJSON();
 		var newUser = new TrollPoll.Models.User(formData);
 		newUser.save({}, {
 			success: function(data) {

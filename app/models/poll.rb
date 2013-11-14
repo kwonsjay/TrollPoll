@@ -5,14 +5,19 @@ class Poll < ActiveRecord::Base
   
   belongs_to :user
   has_many :responses, :inverse_of => :poll, :dependent => :destroy
+  has_many :votes, :dependent => :destroy
   has_many :favorites, :dependent => :destroy
   
   def favorite_count
     Favorite.where(:poll_id => self.id).count
   end
   
+  def voted
+    Vote.exists?(:poll_id => self.id)
+  end
+  
   def as_json(options)
-    super(:include => [:responses, :favorites], :methods => [:favorite_count])
+    super(:include => [{:responses => {:methods => :vote_count}}, :favorites], :methods => [:favorite_count, :voted])
   end
   
 end

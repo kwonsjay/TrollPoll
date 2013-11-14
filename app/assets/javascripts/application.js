@@ -11,11 +11,15 @@
 // about supported directives.
 //
 //= require jquery
+//= require jqueryui
 //= require jquery_ujs
 //= require serializeJSON
 //= require turbolinks
 //= require underscore
 //= require backbone
+//= require pusher
+//= require raphael
+//= require graphael
 //= require troll_poll
 //= require_tree ../templates
 //= require_tree ./models

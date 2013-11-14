@@ -8,6 +8,7 @@ TrollPoll::Application.routes.draw do
   resources :votes, :only => [:create]
   resources :favorites, :only => [:index]
   resource :session, :only => [:create, :destroy, :new]
+  resources :responses, :only => [:index]
   
   post "/sms", to: "votes#sms"
   root :to => "static#root"

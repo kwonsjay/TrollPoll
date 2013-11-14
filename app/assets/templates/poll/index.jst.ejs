@@ -1,5 +1,9 @@
-<h2><%= title %> Polls</h2>
-<div class="btn">New Poll</div>
+<div class="indextitlebar">
+	<span class="h2rep"><%= title %> Polls</span>
+	<div class="btn create right">New Poll</div>
+</div>
+<div class="indexbox">
 <% polls.each(function(poll) { %>
-	<h3><a href="#/polls/<%= poll.get('id') %>"><%= poll.get('question') %></a></h3>
+	<a href="#/polls/<%= poll.get('id') %>"><%= poll.get('question') %></a>
 <% }); %>
+</div>
