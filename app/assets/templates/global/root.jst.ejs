@@ -1,4 +1,24 @@
 <h2>Welcome to Troll Poll!</h2>
-<p>Here's a short tutorial on how to use Troll Poll for maximum Trolling!</p>
-<p>Not a member?</p>
+<div class="graphic">
+	<div class="topbar">
+		<div class="topbtns">
+			<div class="topbtn red"></div>
+			<div class="topbtn yellow"></div>
+			<div class="topbtn green"></div>
+		</div>
+		<span class="title">Troll Poll</span>
+	</div>
+	<div class="window">
+		<span class="chartxt">Get Answers, Now.</span>
+		<div id="rootchart">
+		</div>
+	</div>
+	<div class="btmbar">
+		<span class="status">7 Items</span>
+	</div>
+</div>
+<% if (!TrollPoll.currentUser.get('id')) { %>
+<h2>What are you waiting for?</h2>
 <div class="btn submit">Sign Up</div>
+<div class="btn guest">Guest Account</div>
+<% } %>

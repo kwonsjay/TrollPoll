@@ -179,67 +179,6 @@ TrollPoll.Views.PollDetail = Backbone.View.extend({
 		}
 	},
 	
-	drawDot: function () {
-		var that = this;
-    var items = [];
-		this.model.pollResponses().each(function(response) {
-			var count = parseInt(response.get('vote_count'));
-			var color = that.randomColor();
-			var rootEl = ".blk_" + response.get('id');
-			var textEl = ".txt_" + response.get('id');
-			// $(rootEl).css({"background": color});
-			if (count > 0) {
-				items.push({value: count,
-										id: response.get('id'),
-										color: color,
-										title: '%%' + textEl
-									});
-			}
-		});
-		
-		if (items.length > 0) {
-			$("#chartspace").empty();
-			this._raphael = Raphael("chartspace");
-			
-	    var bar = this._raphael.barchart(250, 200, 180, 180, _.pluck(items, "id"),
-					_.pluck(items, "value"), _.pluck(items, "value"), {
-	        colors: _.pluck(items, "color"),
-					axis: '1 1 1 1'
-	    });
-		}
-		
-			// pie.each(function() {
-// 				var cssEl = this.label[1].attrs.text.match(/.txt_\d+/)[0].replace('txt', 'blk');
-// 				var color = this.label[0].attrs.fill;
-// 				$(cssEl).css({"background": color});
-// 			  this.sector.scale(0, 0, this.cx, this.cy);
-// 			  this.sector.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 1000, "bounce");
-// 			});
-// 		
-// 	    pie.hover(function() {
-// 				var sect = this.sector;
-// 		    this.sector.scale(1.1, 1.1, this.cx, this.cy);
-// 				pie.each(function() {
-// 					if (this.sector.id === sect.id) {
-// 						var percent = this.label[1].attrs.text.match(/^\d+%/)[0];
-// 						popup = that._raphael.text(250, 200, percent).attr({
-// 							"font": '40px Helvetica Neue',
-// 							"font-weight": "100"
-// 						});
-// 						var cssEl = this.label[1].attrs.text.match(/.txt_\d+/)[0];
-// 						$(cssEl).animate({"background-color": "#d1d1d1", "color": "#fff"}, 200, function() {
-// 							$(this).animate({"background-color": "#fff", "color": "#9099a3"});
-// 						});
-// 					}
-// 				});
-// 	    }, function() {
-// 	      this.sector.animate({
-// 	        transform: 's1 1 ' + this.cx + ' ' + this.cy
-// 	    }, 500, "bounce");
-// 			popup.remove();
-// 	    });
-// 		}
-	},
 	randomColor: function() {
 		return '#' + ('00000' + Math.floor(Math.random()*16777216).toString(16)).substr(-6);
 	}

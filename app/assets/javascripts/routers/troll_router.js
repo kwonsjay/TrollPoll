@@ -17,13 +17,9 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 	},
 	
 	root: function() {
-		if (this.userIru()) {
-			Backbone.history.navigate("/index", {trigger: true});
-		}
-		else {
-			var newRootView = new TrollPoll.Views.RootView();
-			this._switchView(newRootView);
-		}
+		var newRootView = new TrollPoll.Views.RootView();
+		this._switchView(newRootView);
+		newRootView.drawChart();
 	},
 	
 	loginUser: function() {

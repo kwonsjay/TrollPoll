@@ -13,13 +13,18 @@ window.TrollPoll = {
 				Backbone.history.start();
 			}
 		});
+		this._installSidebar($("#sidebar"));
 		this._installHeader($("#header"));
   },
 	_installHeader: function($header) {
-		var newheaderView = new TrollPoll.Views.HeaderView({
+		var newHeaderView = new TrollPoll.Views.HeaderView({
 			model: TrollPoll.currentUser
 		});
-		$header.html(newheaderView.render().$el);
+		$header.html(newHeaderView.render().$el);
+	},
+	_installSidebar: function($sidebar) {
+		var newSidebarView = new TrollPoll.Views.SidebarView();
+		$sidebar.html(newSidebarView.render().$el);
 	}
 };
 

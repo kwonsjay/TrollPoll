@@ -11,6 +11,13 @@ TrollPoll.Views.UserCreation = Backbone.View.extend({
 		var that = this;
 		var formData = $("#form").serializeJSON();
 		var newUser = new TrollPoll.Models.User(formData);
+		if (!newUser.isValid()) {
+			that.$(".errormsg").empty();
+			newUser.validationError.forEach(function(errorMessage) {
+				that.$(".errormsg").append("<span class='error'>Error: " + errorMessage + "</span><br>");
+			});
+			return;
+		}
 		newUser.save({}, {
 			success: function(data) {
 				TrollPoll.currentUser.set(data);
