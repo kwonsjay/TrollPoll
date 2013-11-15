@@ -134,7 +134,7 @@ i:hover {
 }
 
 #chartspace {
-	width: 55%;
+	width: 450px;
 	height: 450px;
 	float: left;
 	box-sizing: border-box;
