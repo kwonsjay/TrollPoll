@@ -13,6 +13,9 @@
 
 ActiveRecord::Schema.define(version: 20131112003418) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "favorites", force: true do |t|
     t.integer  "poll_id",    null: false
     t.integer  "user_id",    null: false
@@ -20,8 +23,8 @@ ActiveRecord::Schema.define(version: 20131112003418) do
     t.datetime "updated_at"
   end
 
-  add_index "favorites", ["poll_id"], name: "index_favorites_on_poll_id"
-  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id"
+  add_index "favorites", ["poll_id"], name: "index_favorites_on_poll_id", using: :btree
+  add_index "favorites", ["user_id"], name: "index_favorites_on_user_id", using: :btree
 
   create_table "polls", force: true do |t|
     t.string   "question",                   null: false
@@ -31,7 +34,7 @@ ActiveRecord::Schema.define(version: 20131112003418) do
     t.datetime "updated_at"
   end
 
-  add_index "polls", ["user_id"], name: "index_polls_on_user_id"
+  add_index "polls", ["user_id"], name: "index_polls_on_user_id", using: :btree
 
   create_table "responses", force: true do |t|
     t.string   "answer",     null: false
@@ -40,7 +43,7 @@ ActiveRecord::Schema.define(version: 20131112003418) do
     t.datetime "updated_at"
   end
 
-  add_index "responses", ["poll_id"], name: "index_responses_on_poll_id"
+  add_index "responses", ["poll_id"], name: "index_responses_on_poll_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "username",        null: false
@@ -50,7 +53,7 @@ ActiveRecord::Schema.define(version: 20131112003418) do
     t.datetime "updated_at"
   end
 
-  add_index "users", ["username"], name: "index_users_on_username", unique: true
+  add_index "users", ["username"], name: "index_users_on_username", unique: true, using: :btree
 
   create_table "votes", force: true do |t|
     t.string   "number",      null: false
@@ -60,8 +63,8 @@ ActiveRecord::Schema.define(version: 20131112003418) do
     t.datetime "updated_at"
   end
 
-  add_index "votes", ["number"], name: "index_votes_on_number"
-  add_index "votes", ["poll_id"], name: "index_votes_on_poll_id"
-  add_index "votes", ["response_id"], name: "index_votes_on_response_id"
+  add_index "votes", ["number"], name: "index_votes_on_number", using: :btree
+  add_index "votes", ["poll_id"], name: "index_votes_on_poll_id", using: :btree
+  add_index "votes", ["response_id"], name: "index_votes_on_response_id", using: :btree
 
 end

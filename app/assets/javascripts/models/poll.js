@@ -46,6 +46,7 @@ TrollPoll.Models.Poll = Backbone.Model.extend({
 	pollResponses: function() {
 		if (!this._pollResponses) {
 			this._pollResponses = new TrollPoll.Collections.Responses([], {poll: this});
+			this._pollResponses.comparator = "id";
 		}
 		return this._pollResponses;
 	},
