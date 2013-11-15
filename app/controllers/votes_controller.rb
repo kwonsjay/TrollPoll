@@ -1,10 +1,5 @@
 class VotesController < ApplicationController
   
-  TWILIO_SID = "ACea98a3a3b6d59dbec8ac457e0313647b"
-  TWILIO_TOKEN = "6c5f7b6c012e3e85cbf96ba2f6fe99ca"
-  BASE_URL = "http://web1.tunnlr.com:12957/sms"
-  CALLER_NO = "7655944049"
-  
   def index
     @vote_count = Vote.where(:response_id => params[:response_id]).count
     render :json => @vote_count
@@ -54,30 +49,30 @@ class VotesController < ApplicationController
   end
   
   def thanks_but_no
-    @twilio_client = Twilio::REST::Client.new TWILIO_SID, TWILIO_TOKEN
+    @twilio_client = Twilio::REST::Client.new ENV["TWILIO_SID"], ENV["TWILIO_TOKEN"]
     
     @twilio_client.account.sms.messages.create(
-    :from => "+1#{CALLER_NO}",
+    :from => "+1" + ENV["TWILIO_CALLER_NO"],
     :to => params[:From],
     :body => "You've already voted!"
     )
   end
   
   def thanks_for_voting
-    @twilio_client = Twilio::REST::Client.new TWILIO_SID, TWILIO_TOKEN
+    @twilio_client = Twilio::REST::Client.new ENV["TWILIO_SID"], ENV["TWILIO_TOKEN"]
     
     @twilio_client.account.sms.messages.create(
-    :from => "+1#{CALLER_NO}",
+    :from => "+1" + ENV["TWILIO_CALLER_NO"],
     :to => params[:From],
     :body => "Thanks for voting at TrollPoll!"
     )
   end
   
   def lets_blame_you
-    @twilio_client = Twilio::REST::Client.new TWILIO_SID, TWILIO_TOKEN
+    @twilio_client = Twilio::REST::Client.new ENV["TWILIO_SID"], ENV["TWILIO_TOKEN"]
     
     @twilio_client.account.sms.messages.create(
-    :from => "+1#{CALLER_NO}",
+    :from => "+1" + ENV["TWILIO_CALLER_NO"],
     :to => params[:From],
     :body => "Invalid vote!"
     )
