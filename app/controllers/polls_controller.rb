@@ -30,6 +30,10 @@ class PollsController < ApplicationController
   
   def update
     @poll = Poll.find(params[:id])
+    @response_params = params[:responses]
+    
+    
+    
     if @poll.update_attributes(params[:poll])
       render :json => @poll
     else

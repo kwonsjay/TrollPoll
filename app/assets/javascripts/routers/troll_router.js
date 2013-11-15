@@ -17,8 +17,13 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 	},
 	
 	root: function() {
-		var newRootView = new TrollPoll.Views.RootView();
-		this._switchView(newRootView);
+		if (this.userIru()) {
+			Backbone.history.navigate("/index", {trigger: true});
+		}
+		else {
+			var newRootView = new TrollPoll.Views.RootView();
+			this._switchView(newRootView);
+		}
 	},
 	
 	loginUser: function() {
@@ -58,7 +63,9 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 	
 	createPoll: function() {
 		if (this.userIru()) {
-			var newPollCreation = new TrollPoll.Views.PollCreation();
+			var newPollCreation = new TrollPoll.Views.PollCreation({
+				model: new TrollPoll.Models.Poll()
+			});
 			this._switchView(newPollCreation);
 		}
 		else {
@@ -91,26 +98,33 @@ TrollPoll.Routers.TrollRouter = Backbone.Router.extend({
 	
 	userPolls: function(id) {
 		var cuid = TrollPoll.currentUser.id;
-		var polls = TrollPoll.polls.where({user_id: cuid});
-		var newCollection = new TrollPoll.Collections.Polls(polls);
-		var newPollIndex = new TrollPoll.Views.PollIndex({
-			collection: newCollection,
-			title: "My"
-		});
-		this._switchView(newPollIndex);
+		if (cuid != id) {
+			Backbone.history.navigate("/index", {trigger: true});
+			this.invalidPermissions();
+		}
+		else {
+			var polls = TrollPoll.polls.where({user_id: cuid});
+			var newCollection = new TrollPoll.Collections.Polls(polls);
+			var newPollIndex = new TrollPoll.Views.PollIndex({
+				collection: newCollection,
+				title: "My"
+			});
+			this._switchView(newPollIndex);
+		}
 	},
 	
 	editPoll: function(id) {
 		var cuid = TrollPoll.currentUser.id;
 		var poll = TrollPoll.polls.get(id);
 		if (this.userIru() && poll.get('user_id') == cuid) {
-			var newPollEdit = new TrollPoll.Views.PollEdit({
+			var newPollEdit = new TrollPoll.Views.PollCreation({
 				model: poll
 			});
 			this._switchView(newPollEdit);
 		}
 		else {
 			Backbone.history.navigate("/polls/" + id, {trigger: true});
+			this.invalidPermissions();
 		}
 	},
 	

@@ -19,6 +19,7 @@ TrollPoll.Models.Response = Backbone.Model.extend({
 	toJSON: function() {
 		var formData = _.extend({}, this.attributes);
 		delete formData.vote_count;
+		delete formData.idxid;
 		return formData;
 	}
 });

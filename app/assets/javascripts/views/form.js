@@ -3,11 +3,11 @@ TrollPoll.Views.UserCreation = Backbone.View.extend({
 	
 	events: {
 		// "submit form": "submitUser",
-		"click .submit": "submitUser"
+		"click .submit": "submitUser",
+		"keypress :input": "keyAction"
 	},
 	
-	submitUser: function(event) {
-		event.preventDefault();
+	submitUser: function() {
 		var that = this;
 		var formData = $("#form").serializeJSON();
 		var newUser = new TrollPoll.Models.User(formData);
@@ -26,6 +26,12 @@ TrollPoll.Views.UserCreation = Backbone.View.extend({
 				that.$(".errormsg").html('<span class="error">Error: ' + xhr.responseText + '</span>');
 			}
 		});
+	},
+	
+	keyAction: function(e) {
+		if (e.keyCode == 13) {
+			this.submitUser();
+		}
 	},
 	
 	render: function() {

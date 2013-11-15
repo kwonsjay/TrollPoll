@@ -2,7 +2,7 @@ TrollPoll::Application.routes.draw do
   resources :users
   resources :polls, :only => [:index, :create, :show, :destroy, :update] do
     resources :votes, :only => [:index]
-    resources :responses, :only => [:create, :update]
+    resources :responses, :only => [:create, :update, :destroy]
     resources :favorites, :only => [:create, :destroy]
   end
   resources :votes, :only => [:create]

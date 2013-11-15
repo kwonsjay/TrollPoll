@@ -3,11 +3,11 @@ TrollPoll.Views.LoginView = Backbone.View.extend({
 	
 	events: {
 		// "submit form": "submitSession"
-		"click .submit": "submitSession"
+		"click .submit": "submitSession",
+		"keypress :input": "keyAction"
 	},
 	
-	submitSession: function(event) {
-		event.preventDefault();
+	submitSession: function() {
 		var that = this;
 		$.ajax({
 			type: "POST",
@@ -33,6 +33,12 @@ TrollPoll.Views.LoginView = Backbone.View.extend({
 				that.$(".errormsg").html('<span class="error">Error: ' + xhr.responseText + '</span>');
 			}
 		});
+	},
+	
+	keyAction: function(e) {
+		if (e.keyCode == 13) {
+			this.submitSession();
+		}
 	},
 	
 	render: function() {

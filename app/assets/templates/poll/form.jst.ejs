@@ -4,11 +4,35 @@
 
 <form id="form">
 	<!-- <input type="submit" id="submit" value="Create Poll"> -->
-	<div class="btn submit">Create Poll</div>
+	<% if (poll.isNew()) { %>
+	<div class="btn create">Create Poll</div>
+	<% } else { %>
+	<div class="btn edit">Update Poll</div>
+	<% } %>
 	<div class="btn add_response">Add Answer</div>
+	<div class="inputbox short">
+		<label for="poll_private">Private</label>
+		<input type="checkbox" id="poll_private" name="poll[private]" value="true" <% if (poll.get('private')){ %>
+			<%= "checked" %>
+			<% } %>>
+	</div>
 	<div class="inputbox">
 		<label for="poll_question">Question</label>
-		<input id="poll_question" name="poll[question]">
+		<input type="text" id="poll_question" name="poll[question]" value="<%= poll.get('question') %>">
+		<% if (poll.isNew()) { %>
 		<i class="icon-close return"></i>
+		<% } else { %>
+		<i class="icon-close dpoll"></i>
+		<% } %>
 	</div>
+	<% poll.pollResponses().each(function(response, index) { %>
+	<div class="inputbox resp answer_<%= index %>">
+		<label for="response_answer_<%= index %>">Answer</label>
+		<input type="text" id="response_answer_<%= index %>" name="poll[responses][<%= index %>][answer]" value="<%= response.get('answer') %>">
+		<% if (!response.isNew()) { %>
+		<input type="hidden" name="poll[responses][<%= index %>][id]" value="<%= response.get('id') %>">
+		<% } %>
+		<i class="icon-close remove" data-id="<%= index %>"></i>
+	</div>
+	<% })  %>
 </form>

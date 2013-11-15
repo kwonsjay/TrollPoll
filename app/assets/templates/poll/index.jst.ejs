@@ -1,6 +1,8 @@
 <div class="indextitlebar">
 	<span class="h2rep"><%= title %> Polls</span>
+	<% if (!!TrollPoll.currentUser.get('id')) { %>
 	<div class="btn create right">New Poll</div>
+	<% } %>
 </div>
 <div class="indexbox">
 <% polls.each(function(poll) { %>

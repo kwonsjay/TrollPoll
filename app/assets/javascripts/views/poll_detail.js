@@ -151,38 +151,36 @@ TrollPoll.Views.PollDetail = Backbone.View.extend({
 					votes: _.pluck(items, "vote"),
 					cssEls: _.pluck(items, "cssEl")
 	    });
-		}
-		
-		
-		bar.each(function() {
-			var cssEl = this.bar.cssEl;
-			var color = this.bar.attrs.fill;
-			$(cssEl).css({"background": color});
-		  this.bar.scale(0, 0, this.cx, this.cy);
-		  this.bar.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 1000, "bounce");
-		});
-		
-    bar.hover(function() {
-			var thisbar = this.bar;
-	    this.bar.scale(1.1, 1.1, this.cx, this.cy);
 			bar.each(function() {
-				if (this.bar.id === thisbar.id) {
-					popup = that._raphael.popup(this.bar.x, this.bar.y, this.bar.vote).attr({
-							"font": '20px Helvetica Neue',
-							"font-weight": "100"
-					});
-					var cssEl = this.bar.cssEl.replace(".blk", ".txt");
-					$(cssEl).animate({"background-color": "#d1d1d1", "color": "#fff"}, 200, function() {
-						$(this).animate({"background-color": "#fff", "color": "#9099a3"});
-					});
-				}
+				var cssEl = this.bar.cssEl;
+				var color = this.bar.attrs.fill;
+				$(cssEl).css({"background": color});
+			  this.bar.scale(0, 0, this.cx, this.cy);
+			  this.bar.animate({ transform: 's1 1 ' + this.cx + ' ' + this.cy }, 1000, "bounce");
 			});
-    }, function() {
-      this.bar.animate({
-        transform: 's1 1 ' + this.cx + ' ' + this.cy
-	    }, 500, "bounce");
-			popup.remove();
-		});
+		
+	    bar.hover(function() {
+				var thisbar = this.bar;
+		    this.bar.scale(1.1, 1.1, this.cx, this.cy);
+				bar.each(function() {
+					if (this.bar.id === thisbar.id) {
+						popup = that._raphael.popup(this.bar.x, this.bar.y, this.bar.vote).attr({
+								"font": '20px Helvetica Neue',
+								"font-weight": "100"
+						});
+						var cssEl = this.bar.cssEl.replace(".blk", ".txt");
+						$(cssEl).animate({"background-color": "#d1d1d1", "color": "#fff"}, 200, function() {
+							$(this).animate({"background-color": "#fff", "color": "#9099a3"});
+						});
+					}
+				});
+	    }, function() {
+	      this.bar.animate({
+	        transform: 's1 1 ' + this.cx + ' ' + this.cy
+		    }, 500, "bounce");
+				popup.remove();
+			});
+		}
 	},
 	
 	drawDot: function () {

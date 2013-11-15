@@ -1,10 +1,10 @@
 TrollPoll.Models.Poll = Backbone.Model.extend({
 	urlRoot: "/polls",
 	
-	validates: function() {
+	validate: function() {
 		var errors = [];
 		
-		if (this.get('question').length == 0) {
+		if (!this.get('question') || this.get('question').length == 0) {
 			errors.push("Question can't be blank!");
 		}
 		

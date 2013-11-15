@@ -1,7 +1,9 @@
 <h1>Troll Poll</h1>
 <% if (!TrollPoll.currentUser.get("id")) { %>
 	<div class="button signin">Sign In</div>
+	<div class="button signup">Sign Up</div>
 <%} else {%>
 	<div class="button signout">Sign Out</div>
 	<div class="button profile">Profile</div>
 <% } %>
+<div class="button indexlink">Index</div>

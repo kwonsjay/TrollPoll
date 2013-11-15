@@ -72,6 +72,13 @@ input {
 	color: #9099a3;
 }
 
+input[type='checkbox'] {
+	margin: auto;
+	margin-top: 5px;
+	width: 30px;
+	float: right;
+}
+
 i {
 	font-size: 1.2em;
 	float: right;
@@ -81,6 +88,7 @@ i {
 i:hover {
 	color: #ff7b7b;
 }
+
 
 .favs i {
 	font-size: 2em;
@@ -94,6 +102,13 @@ i:hover {
 	border-radius: 20px;
 	background: #404040;
 	color: white;
+}
+
+.short {
+	width: 200px;
+	margin-right: 0;
+	padding: 10px 0px 10px 0px;
+	border-radius: 15px;
 }
 
 .resp {
@@ -218,7 +233,7 @@ i:hover {
 	letter-spacing: 1px;
 }
 
-.btn {
+/*.btn {
 	background: white;
 	margin-top: 20px;
 	width: 150px;
@@ -234,6 +249,31 @@ i:hover {
 	transition: color 0.1s linear;
 	letter-spacing: 1px;
 	line-height: 20px;
+	font-weight: 100;
+	display: inline-block;
+	margin: auto;
+}
+
+.btn:hover {
+	background: #404040;
+	color: white;
+}*/
+
+.btn {
+	background: #e2e2e2;
+	margin-top: 20px;
+	width: 200px;
+	height: 50px;
+	text-align: center;
+/*	border: 1px solid #404040;*/
+	border-radius: 10px;
+	transition: background 0.2s linear;
+	text-decoration: none;
+	color: #404040;
+	font-size: 1.2em;
+	transition: color 0.2s linear;
+	letter-spacing: 1px;
+	line-height: 50px;
 	font-weight: 100;
 	display: inline-block;
 	margin: auto;
@@ -382,6 +422,10 @@ i:hover {
 	color: white;
 }
 
+.index {
+	margin-top: 30px;
+}
+
 #errors {
 	width: 100%;
 	font-weight: 100;
@@ -397,6 +441,8 @@ i:hover {
 	letter-spacing: 1px;
 	color: red;
 }
+
+
 
 #errors i {
 	margin: 50px 0px 0px 300px;
@@ -441,4 +487,13 @@ i:hover {
 
 .bordright {
 	border-right: 1px solid #e2e2e2;
+}
+
+.top {
+	margin-top: 30px;
+}
+
+.lighter {
+	background: #4aa3ff;
+	width: 40%;
 }

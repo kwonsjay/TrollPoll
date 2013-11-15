@@ -2,7 +2,7 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 	template: JST["global/root"],
 	
 	events: {
-		"click .btn": "newUser"
+		"click .submit": "newUser"
 	},
 	
 	newUser: function() {

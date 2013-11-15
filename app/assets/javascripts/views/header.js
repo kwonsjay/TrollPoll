@@ -4,7 +4,9 @@ TrollPoll.Views.HeaderView = Backbone.View.extend({
 	events: {
 		"click .signin": "signIn",
 		"click .signout": "signOut",
-		"click .profile": "viewUser"
+		"click .profile": "viewUser",
+		"click .indexlink": "viewIndex",
+		"click .signup": "redirectSignup"
 	},
 	
 	initialize: function() {
@@ -31,7 +33,15 @@ TrollPoll.Views.HeaderView = Backbone.View.extend({
 	},
 	
 	viewUser: function() {
-		Backbone.history.navigate("/users/" + TrollPoll.currentUser.id, {trigger: true});
+		Backbone.history.navigate("/users/" + TrollPoll.currentUser.id + "/polls", {trigger: true});
+	},
+	
+	viewIndex: function() {
+		Backbone.history.navigate("/index", {trigger: true});
+	},
+	
+	redirectSignup: function() {
+		Backbone.history.navigate("/signup", {trigger: true});
 	},
 	
 	render: function() {
