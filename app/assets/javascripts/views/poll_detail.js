@@ -4,8 +4,7 @@ TrollPoll.Views.PollDetail = Backbone.View.extend({
 		this.check = options.check;
 		this.listenTo(this.model, "add change remove sync", this.render);
 		this.listenTo(this.model, "add change remove sync", this.drawChart);
-		var pusher = new Pusher(TrollPoll.key);
-		console.log(TrollPoll.key);
+		var pusher = new Pusher('ebfc9db7bd4c5a0e5a6f');
 		var channel = pusher.subscribe('trollpoll');
 		channel.bind('rerender', function(data) {
 			var rid = parseInt(data.response_id);
