@@ -1,6 +1,9 @@
 <script type="application/json" id="bootstrapped_user">
 	{ "user": <%= current_user.to_json.html_safe %> }
 </script>
+<script type="application/json" id="boostrapped_key">
+	{ "key": <%= Pusher.key %> }
+</script>
 <div id="wrapper">
 <div id="sidebar">
 	<a href="/" class="logo">Tp</a>

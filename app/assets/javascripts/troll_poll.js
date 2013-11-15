@@ -5,8 +5,10 @@ window.TrollPoll = {
   Routers: {},
   initialize: function() {
 		var currentUser = JSON.parse($("#bootstrapped_user").html());
+		var pusherkey = JSON.parse($("#bootstrapped_key").html());
 		TrollPoll.currentUser = new TrollPoll.Models.User(currentUser.user);
     TrollPoll.polls = new TrollPoll.Collections.Polls();
+		TrollPoll.key = pusherkey.key;
 		TrollPoll.polls.fetch({
 			success: function() {
 				new TrollPoll.Routers.TrollRouter($("#content"));
