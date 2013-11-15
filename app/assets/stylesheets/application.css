@@ -134,7 +134,7 @@ i:hover {
 }
 
 #chartspace {
-	width: 40%;
+	width: 55%;
 	height: 450px;
 	float: left;
 	box-sizing: border-box;
@@ -159,7 +159,7 @@ i:hover {
 	display: inline-block;
 	box-sizing: border-box;
 	float: left;
-	width: 55%;
+	width: 40%;
 }
 
 #legend {
