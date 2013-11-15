@@ -6,7 +6,7 @@
 </div>
 <h1>TXT ID to POLL-944-049 ( 7655 944 049 )</h1>
 <h1>Question:</h1>
-<h2><%= poll.get('question') %></h2>
+<h2><%= poll.escape('question') %></h2>
 <h1>Answer Choices:</h1>
 <div class="container">
 	<div class="pollinfo">
@@ -14,8 +14,8 @@
 		<div class="response txt_<%= response.get('id') %>">
 			<div class="colorblk blk_<%= response.get('id') %>"><%= response.get('vote_count') %></div>
 			
-			<span class="lpadsm left"><%= response.get('answer') %></span>
-			<span class="lpadlg right">TXT ID: <%= response.get('id') %></span>
+			<span class="lpadsm left"><%= response.escape('answer') %></span>
+			<span class="lpadlg right">TXT ID: <%= response.escape('id') %></span>
 		</div>
 		<br>
 	<% }); %>

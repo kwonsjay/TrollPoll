@@ -6,6 +6,6 @@
 </div>
 <div class="indexbox">
 <% polls.each(function(poll) { %>
-	<a href="#/polls/<%= poll.get('id') %>"><%= poll.get('question') %></a>
+	<a href="#/polls/<%= poll.get('id') %>"><%= poll.escape('question') %></a>
 <% }); %>
 </div>
