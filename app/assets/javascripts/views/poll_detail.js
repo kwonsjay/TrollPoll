@@ -28,10 +28,6 @@ TrollPoll.Views.PollDetail = Backbone.View.extend({
 	},
 
 	render: function() {
-		// var colors = [];
-		// while (colors.length != this.model.pollResponses().length) {
-		// 	colors.push(this.randomColor());
-		// }
 		var renderedContent = this.template({
 			poll: this.model,
 		});
