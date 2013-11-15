@@ -321,6 +321,7 @@ i:hover {
 	height: 80px;
 	text-decoration: none;
 	text-align: center;
+	border-bottom: 1px solid #626262;
 }
 
 #sidebar ul li a {
@@ -347,6 +348,7 @@ i:hover {
 	display: block;
 	padding: 20px;
 	margin: auto;
+	border-bottom: 1px solid #626262;
 }
 
 #sidebar a {
