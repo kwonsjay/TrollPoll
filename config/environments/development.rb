@@ -29,8 +29,8 @@ TrollPoll::Application.configure do
 
   #PUSHER CREDENTIALS
   require 'pusher'
-  Pusher.app_id = 59198
-  Pusher.key = 'ebfc9db7bd4c5a0e5a6f'
-  Pusher.secret = '551c4936d70b263a3827'
+  Pusher.app_id = ENV["PUSHER_APP_ID"]
+  Pusher.key    = ENV["PUSHER_KEY"]
+  Pusher.secret = ENV["PUSHER_SECRET"]
   
 end
