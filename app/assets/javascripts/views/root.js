@@ -27,7 +27,7 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 				}
 			},
 			success: function(data) {
-				TrollPoll.currentUser.set(data);
+				TrollPoll.currentUser.set(data, {silent: true});
 				TrollPoll.polls.fetch({
 					success: function() {
 						Backbone.history.navigate("/index", {trigger: true});
@@ -52,7 +52,7 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 			colors.push(this.randomColor());
 		}
 		
-    var pie = this._raphael.piechart(300, 150, 120, [1,2,1,4,2,3,1], {
+    var pie = this._raphael.piechart(300, 150, 120, [1,1,1], {
         colors: colors,
 				stroke: "#FFF",
 				strokewidth: 1
@@ -78,9 +78,7 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 	},
 	
 	render: function() {
-		var renderedContent = this.template({
-			
-		});
+		var renderedContent = this.template();
 		this.$el.html(renderedContent);
 		return this;
 	}

@@ -61,7 +61,6 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 			});
 		});
 		this.model.save({}, {
-			wait: true,
 			success: function() {
 				that.model.trigger("sync");
 				Backbone.history.navigate("/polls/" + that.model.id, {trigger: true});
