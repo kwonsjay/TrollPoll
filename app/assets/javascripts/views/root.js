@@ -27,7 +27,7 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 				}
 			},
 			success: function(data) {
-				TrollPoll.currentUser.set(data, {silent: true});
+				TrollPoll.currentUser.set(data);
 				TrollPoll.polls.fetch({
 					success: function() {
 						Backbone.history.navigate("/index", {trigger: true});
