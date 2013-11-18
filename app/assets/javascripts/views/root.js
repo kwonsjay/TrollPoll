@@ -1,4 +1,9 @@
 TrollPoll.Views.RootView = Backbone.View.extend({
+	initialize: function() {
+		this.listenTo(TrollPoll.currentUser, "change", this.render);
+		this.listenTo(TrollPoll.currentUser, "change", this.drawChart);
+	},
+	
 	template: JST["global/root"],
 	
 	events: {

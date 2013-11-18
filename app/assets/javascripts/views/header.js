@@ -24,7 +24,7 @@ TrollPoll.Views.HeaderView = Backbone.View.extend({
 			success: function(data) {
 				TrollPoll.currentUser.clear();
 				TrollPoll.polls.reset([]);
-				Backbone.history.navigate("/#", {trigger: true});
+				Backbone.history.navigate("/", {trigger: true});
 			},
 			error: function(xhr, status, error) {
 				alert(xhr.responseText);
