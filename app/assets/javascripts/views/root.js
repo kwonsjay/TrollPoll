@@ -8,7 +8,10 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 	
 	events: {
 		"click .submit": "newUser",
-		"click .guest": "loginGuest"
+		"click .guest": "loginGuest",
+		"click .green": "expand",
+		"click .yellow": "minimize",
+		"click .red": "shake"
 	},
 	
 	newUser: function() {
@@ -76,6 +79,19 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 	
 	randomColor: function() {
 		return '#' + ('00000' + Math.floor(Math.random()*16777216).toString(16)).substr(-6);
+	},
+	
+	expand: function() {
+		$(".graphic").animate({"width": "100%"}, 1000);
+	},
+	
+	minimize: function() {
+		$('.window').toggle("blind", 1000);
+		$('.btmbar').toggle("blind", 1000);
+	},
+	
+	shake: function() {
+		$(".graphic").effect("shake", 300);
 	},
 	
 	render: function() {
