@@ -35,8 +35,8 @@ TrollPoll.Views.UserCreation = Backbone.View.extend({
 		});
 	},
 	
-	keyAction: function(e) {
-		if (e.keyCode == 13) {
+	keyAction: function(event) {
+		if (event.keyCode == 13) {
 			this.submitUser();
 		}
 	},

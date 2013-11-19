@@ -12,7 +12,7 @@
 	<div class="btn add_response">Add Answer</div>
 	<div class="inputbox short">
 		<label for="poll_private">Private</label>
-		<input type="checkbox" id="poll_private" name="poll[private]" value="true" <% if (poll.get('private')){ %>
+		<input type="checkbox" class="private" id="poll_private" name="poll[private]" value="true" <% if (poll.get('private')){ %>
 			<%= "checked" %>
 			<% } %>>
 	</div>
@@ -28,7 +28,7 @@
 	<% poll.pollResponses().each(function(response, index) { %>
 	<div class="inputbox resp answer_<%= index %>">
 		<label for="response_answer_<%= index %>">Answer</label>
-		<input type="text" id="response_answer_<%= index %>" name="poll[responses][<%= index %>][answer]" value="<%= response.get('answer') %>">
+		<input type="text" class="iterator" id="response_answer_<%= index %>" name="poll[responses][<%= index %>][answer]" value="<%= response.get('answer') %>" data-id="<%= index %>">
 		<% if (!response.isNew()) { %>
 		<input type="hidden" name="poll[responses][<%= index %>][id]" value="<%= response.get('id') %>">
 		<% } %>

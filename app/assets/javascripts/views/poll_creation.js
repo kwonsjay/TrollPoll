@@ -1,6 +1,6 @@
 TrollPoll.Views.PollCreation = Backbone.View.extend({
 	initialize: function() {
-		this.listenTo(this.model, "add remove change sync", this.render);
+		// this.listenTo(this.model, "add remove change sync", this.render);
 		this.listenTo(this.model.pollResponses(), "add remove change sync", this.render);
 	},
 	
@@ -13,7 +13,7 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 		"click .return": "returnIndex",
 		"click .remove": "removeResponse",
 		"click .dpoll": "deletePoll",
-		"keyup :input": "saveKeys"
+		"click .private": "togglePrivacy"
 	},
 	
 	submitPoll: function(event) {
@@ -80,7 +80,23 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 		var newResponse = new TrollPoll.Models.Response({
 			poll: this.model
 		});
+		
+		this.model.set({question: $("#poll_question").val()});
+		var responses = $(".iterator");
+		if (!!responses.length) {
+			for (var i = 0; i < responses.length; i++) {
+				var response = $(responses[i]);
+				console.log(response.val());
+				var responseIdx = parseInt(response.attr('data-id'));
+				var focusResponse = this.model.pollResponses().models[responseIdx];
+				console.log(focusResponse);
+				console.log(this.model.pollResponses());
+				focusResponse.set({answer: response.val()});
+			}
+		}
+		
 		this.model.pollResponses().add(newResponse);
+		
 	},
 	
 	removeResponse: function(event) {
@@ -105,6 +121,21 @@ TrollPoll.Views.PollCreation = Backbone.View.extend({
 				Backbone.history.navigate("/index", {trigger: true});
 			}
 		});
+	},
+	
+	togglePrivacy: function() {
+		var privbool = this.model.get('private');
+		console.log(privbool);
+		if (!!privbool) {
+			this.model.set({private: !privbool});
+			console.log("fetch newly set value switch");
+			console.log(this.model.get('private'));
+		}
+		else {
+			this.model.set({private: true});
+			console.log("fetch newly set value true");
+			console.log(this.model.get('private'));
+		}
 	},
 	
 	render: function() {

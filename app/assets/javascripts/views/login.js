@@ -35,8 +35,8 @@ TrollPoll.Views.LoginView = Backbone.View.extend({
 		});
 	},
 	
-	keyAction: function(e) {
-		if (e.keyCode == 13) {
+	keyAction: function(event) {
+		if (event.keyCode == 13) {
 			this.submitSession();
 		}
 	},
