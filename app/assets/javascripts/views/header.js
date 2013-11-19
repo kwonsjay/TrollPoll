@@ -23,7 +23,6 @@ TrollPoll.Views.HeaderView = Backbone.View.extend({
 			url: "/session",
 			success: function(data) {
 				TrollPoll.currentUser.clear();
-				TrollPoll.polls.reset([]);
 				Backbone.history.navigate("/", {trigger: true});
 			},
 			error: function(xhr, status, error) {
