@@ -27,9 +27,10 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 				}
 			},
 			success: function(data) {
-				TrollPoll.currentUser.set(data);
+				TrollPoll.currentUser.set(data, {silent: true});
 				TrollPoll.polls.fetch({
 					success: function() {
+						TrollPoll.headerView.render();
 						Backbone.history.navigate("/index", {trigger: true});
 					}
 				});
@@ -78,6 +79,7 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 	},
 	
 	render: function() {
+		console.log("THIS SHOULD ONLY RENDER ONCE");
 		var renderedContent = this.template();
 		this.$el.html(renderedContent);
 		return this;

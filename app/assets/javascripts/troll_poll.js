@@ -17,10 +17,14 @@ window.TrollPoll = {
 		this._installHeader($("#header"));
   },
 	_installHeader: function($header) {
-		var newHeaderView = new TrollPoll.Views.HeaderView({
+		TrollPoll.headerView = new TrollPoll.Views.HeaderView({
 			model: TrollPoll.currentUser
 		});
-		$header.html(newHeaderView.render().$el);
+		$header.html(TrollPoll.headerView.render().$el);
+		// var newHeaderView = new TrollPoll.Views.HeaderView({
+		// 	model: TrollPoll.currentUser
+		// });
+		// $header.html(newHeaderView.render().$el);
 	},
 	_installSidebar: function($sidebar) {
 		var newSidebarView = new TrollPoll.Views.SidebarView();
