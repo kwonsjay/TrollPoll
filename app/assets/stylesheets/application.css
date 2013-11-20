@@ -535,7 +535,7 @@ i:hover {
 }
 
 .topbar:hover {
-	background: #404040;
+	background: black;
 }
 
 .topbtns {
@@ -592,22 +592,47 @@ i:hover {
 .window {
 	width: 100%;
 	height: 95%;
-	background: #efefef;
+	background: #333;
 	text-align: center;
+	position: relative;
 }
 
 #rootchart {
-	width: 100%;
-	height: 80%;
+	width: 50%;
+	height: 300px;
+	box-sizing: border-box;
+	display: inline-block;
+	float: left;
+	vertical-align: middle;
+}
+
+.charttxt {
+	width: 45%;
+	height: 300px;
+	box-sizing: border-box;
+	display: inline-block;
+	float: left;
+	vertical-align: middle;
+	background: white;
+	border-radius: 5px;
+}
+
+.infotxt {
+	display: block;
+	font-weight: 200;
+	font-size: 1.2em;
+	letter-spacing: 1px;
+	padding: 20px 0px 20px 0px;
+	color: #404040;
 }
 
 .chartxt {
-	font-size: 1.3em;
+	font-size: 1.5em;
 	font-weight: 100;
 	letter-spacing: 1px;
 	display: block;
 	padding: 20px 0px 15px 0px;
-	color: #404040;
+	color: white;
 }
 
 .btmbar {

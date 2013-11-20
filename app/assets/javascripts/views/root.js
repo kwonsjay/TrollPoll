@@ -56,10 +56,12 @@ TrollPoll.Views.RootView = Backbone.View.extend({
 			colors.push(this.randomColor());
 		}
 		
-    var pie = this._raphael.piechart(300, 150, 120, [1,1,1], {
+    var pie = this._raphael.piechart(150, 150, 120, [1,1,1], {
         colors: colors,
 				stroke: "#FFF",
-				strokewidth: 1
+				strokewidth: 1,
+				donut: true,
+				donutFill: "#333"
     });
 	
 		pie.each(function() {
