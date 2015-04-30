@@ -1,6 +1,6 @@
 ##Troll Poll
 
-http://trollpoll.me  
+http://trollpoll.herokuapp.com/
 
 A clone of the live audience polling feature of Poll Everywhere.  
 
